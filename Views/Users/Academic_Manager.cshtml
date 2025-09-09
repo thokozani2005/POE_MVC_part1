@@ -1,1 +1,35 @@
-﻿
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+@Html.Partial("_NavigationBars")
+<!--The Am dahsboard content-->
+
+<div class="pcMessage">
+    <h1>Welcome to Your Dashboard</h1>
+
+    <p>
+        As the Academic Manager, your role is vital in providing final oversight for claim approvals.
+        Here you can review the Programme Coordinators’ pre-approved submissions, verify supporting documents,
+        and make the final decision on each claim to ensure accuracy and compliance.
+    </p>
+
+    <p>
+        Use this dashboard to monitor the overall approval process, track claims at different stages,
+        and uphold fairness in compensating lecturers. Your review helps maintain accountability
+        and ensures that only valid claims are processed.
+    </p>
+
+
+    <div class="pc-actions">
+        <button class="view-claims-btn">
+            <a href="@Url.Action("finalApproval", "Users")">View and Finalize Claims</a>
+        </button>
+    </div>
+</div>
+
+<footer class="Mysite-footer">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+</footer>
