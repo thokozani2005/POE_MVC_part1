@@ -1,0 +1,77 @@
+﻿
+
+
+<nav class="navigation">
+    <h1>Contract Monthly Claim</h1>
+ </nav>
+<!--Creating forms for the Login page-->
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+
+<div class="LoginMessage">
+    <h3>Please Fill out the following to login</h3>
+</div>
+
+
+<form class="login" asp-controller="Login">
+
+    <div class="finePrint">
+        <p>
+            <strong>Not Registered yet? </strong>
+            <a href="@Url.Action("Dashboard","Home")">Skip Login and go to Home</a>
+        </p>
+    </div>
+    <label>Enter Email</label>
+    <input type="email" name="email" placeholder="Enter your Email" requred />
+
+    <label>Enter Password</label>
+    <input type="password" name="password" placeholder="Enter your Password" requred />
+
+    <div class="radiobutton">
+        <p>Select your role:</p>
+
+        <!--Radio button 1-->
+        <input type="radio" id="lecturer" name="Role" value="Lecturer" required />
+        <label for="lecturer" class="role-card">
+            <div class="marker"></div>
+            <div class="content">
+                <div class="title">Lecturer</div>
+                <div class="subtext">View Lecturer Dashboard</div>
+            </div>
+        </label>
+
+        <input type="radio" id="pc" name="Role" value="PC" required />
+        <label for="pc" class="role-card">
+            <div class="marker"></div>
+            <div class="content">
+                <div class="title">Programme Coordinator</div>
+                <div class="subtext">View PC Dashboard</div>
+            </div>
+        </label>
+
+        <input type="radio" id="am" name="Role" value="AM" required />
+        <label for="am" class="role-card">
+            <div class="marker"></div>
+            <div class="content">
+                <div class="title">Academic Manager</div>
+                <div class="subtext">View AM Dashboard</div>
+            </div>
+        </label>
+        <br>
+
+        
+    </div>
+
+    <button type="submit">Login</button>
+
+
+</form>
+
+        <!--Inserting the custom divider to style this-->
+<div class="custom-shape-divider-bottom-1756420090">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+    </svg>
+</div>
+<footer class="site-footer">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+</footer>
