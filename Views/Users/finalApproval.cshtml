@@ -1,1 +1,91 @@
-﻿
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+@Html.Partial("_NavigationBars")
+
+<div class="pcMessage">
+    <h1>Claims Awaiting Final Approval</h1>
+    <p>
+        The following claims have been reviewed and forwarded by Programme Coordinators.
+        As the Academic Manager, you can now give final approval or reject claims that do not meet the required standards.
+    </p>
+
+    <div class="back_link">
+        <a href="@Url.Action("Academic_Manager", "Users")">
+            &larr; Back to Academic Manager Dashboard
+        </a>
+    </div>
+</div>
+
+<table class="View-preApprove" style="border:solid;">
+    <thead>
+        <tr>
+            <th>Claim No</th>
+            <th>Lecture Name</th>
+            <th>Employee Id</th>
+            <th>Module</th>
+            <th>Number of Sessions</th>
+            <th>Submission Date</th>
+            <th>Coordinator Status</th>
+            <th>Decision</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>CLM001</td>
+            <td>Siyabonga Dlamini</td>
+            <td>EMP1023</td>
+            <td>Programming 1B</td>
+            <td>12</td>
+            <td>24 June 2025</td>
+            <td class="status pre-approved">Pre Approved</td>
+            
+            <td>
+                <select>
+                    <option value="">-- Select --</option>
+                    <option value="pre-approve">Approve</option>
+                    <option value="review">Reject</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>CLM003</td>
+            <td>Themba Zulu</td>
+            <td>EMP1095</td>
+            <td>Database(Intoduction)</td>
+            <td>10</td>
+            <td>28 August</td>
+            <td class="status pre-approved">Pre Approved</td>
+            <td>
+                <select>
+                    <option value="">-- Select --</option>
+                    <option value="pre-approve">Approve</option>
+                    <option value="review">Reject</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>CLM004</td>
+            <td>Lindiwe Mthembu</td>
+            <td>EMP1210</td>
+            <td>Web Development</td>
+            <td>18</td>
+            <td>15 August 2025</td>
+            <td class="status pre-approved">Pre Approved</td>
+
+            <td>
+                <select>
+                    <option value="">-- Select --</option>
+                    <option value="pre-approve">Approve</option>
+                    <option value="review">Reject</option>
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<footer class="site-footer">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+</footer>
