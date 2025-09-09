@@ -1,1 +1,117 @@
-﻿
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+@Html.Partial("_NavigationBars")
+
+<div class="pcMessage">
+    <h1>Claims Awaiting Approval</h1>
+    <p>
+        The following claims have been submitted by lecturers. You can either approve them or mark them for further administrative review.
+    </p>
+    <div class="back_link">
+        <a href="@Url.Action("Program_Coordinator", "Users")">
+            &larr; Back to Programme Coordinator Dashboard
+        </a>
+    </div>
+</div>
+<table class="View-preApprove" style="border:solid;">
+    <thead>
+        <tr>
+            <th>Claim No</th>
+            <th>Lecture Name</th>
+            <th>Employee Id</th>
+            <th>Module</th>
+            <th>Number of Sessions</th>
+            <th>Hourly Rate</th>
+            <th>Claim Status</th>
+            <th>Decision</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>CLM001</td>
+            <td>Siyabonga Dlamini</td>
+            <td>EMP1023</td>
+            <td>Programming 1B</td>
+            <td>12</td>
+            <td>R500</td>
+            <td>Pending</td>
+            <td>
+                <select>
+                    <option value="">-- Select --</option>
+                    <option value="pre-approve">Pre-Approve</option>
+                    <option value="review">Flag for Review</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>CLM002</td>
+            <td>Nokuthula Khumalo</td>
+            <td>EMP1147</td>
+            <td>Database(Intermediate)</td>
+            <td>15</td>
+            <td>R400</td>
+            <td>In Progress</td>
+            <td>
+                <select>
+                    <option value="">-- Select --</option>
+                    <option value="pre-approve">Pre-Approve</option>
+                    <option value="review">Flag for Review</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>CLM003</td>
+            <td>Themba Zulu</td>
+            <td>EMP1095</td>
+            <td>Database(Intoduction)</td>
+            <td>10</td>
+            <td>R370</td>
+            <td>Pending</td>
+            <td>
+                <select>
+                    <option value="">-- Select --</option>
+                    <option value="pre-approve">Pre-Approve</option>
+                    <option value="review">Flag for Review</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>CLM004</td>
+            <td>Lindiwe Mthembu</td>
+            <td>EMP1210</td>
+            <td>Web Development</td>
+            <td>18</td>
+            <td>R380</td>
+            <td>In Progress</td>
+            <td>
+                <select>
+                    <option value="">-- Select --</option>
+                    <option value="pre-approve">Pre-Approve</option>
+                    <option value="review">Flag for Review</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>CLM005</td>
+            <td>Sandile Ngcobo</td>
+            <td>EMP1178</td>
+            <td>Information Security</td>
+            <td>14</td>
+            <td>R420</td>
+            <td>Pending</td>
+            <td>
+                <select>
+                    <option value="">-- Select --</option>
+                    <option value="pre-approve">Pre-Approve</option>
+                    <option value="review">Flag for Review</option>
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<footer class="site-footer">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+</footer>
