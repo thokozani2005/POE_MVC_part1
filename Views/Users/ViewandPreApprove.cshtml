@@ -47,7 +47,12 @@
                 <td>@claim.number_of_sssions</td>
                 <td>@claim.hourly_rate.ToString("R")</td>
                 <td>@claim.TotalAmount.ToString("R")</td>
-                <td>@claim.ClaimStatus</td>
+
+                <td class="status @claim.ClaimStatus.ToLower().Replace(" ", "-")">
+                    @claim.ClaimStatus
+                </td>
+
+                
                 <td>
                     <form asp-action="ViewandPreApprove" method="post">
                         <input type="hidden" name="claimId" value="@claim.Claim_Id" />

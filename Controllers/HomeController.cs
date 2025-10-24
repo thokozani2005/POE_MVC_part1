@@ -16,8 +16,15 @@ namespace POE_MVC_part1.Controllers
 
         public IActionResult Index()
         {
+
+
             ConnectDatabase connectdata = new ConnectDatabase();
             connectdata.GenerateTable();
+
+            //create an instance for class model auto create
+            auto_create_instance_db_tables create = new auto_create_instance_db_tables();
+            //use object name to call the auto create method 
+            create.InitializeSystem();
 
             //exceptionHandling
 

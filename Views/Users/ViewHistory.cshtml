@@ -45,7 +45,10 @@
                         <td>@claim.hourly_rate.ToString("R")</td>
                         <td>@claim.TotalAmount.ToString("r")</td>
                         <td>@claim.startdate to @claim.end_date</td>
-                        <td>@claim.ClaimStatus</td>
+                        <td class="status @claim.ClaimStatus.ToLower().Replace(" ", "-")">
+                            @claim.ClaimStatus
+                        </td>
+
                         <td>
                             @if (claim.DocumentData != null)
                             {

@@ -960,3 +960,39 @@ input[type="radio"]:checked + .role-card {
     .download-link:hover {
         text-decoration: underline;
     }
+
+
+/* ===================== */
+/* Claim Status Coloring */
+/* ===================== */
+
+.status {
+    font-weight: bold;
+    text-align: center;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: white;
+    text-transform: capitalize;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+   
+    .status.approved {
+        background-color: #28a745;
+    }
+
+    .status.pre-approved {
+        background-color: #ffc107;
+        color: black;
+    }
+
+    .status.rejected {
+        background-color: #dc3545;
+    }
+
+    .status.flagged-for-review {
+        background-color: #fd7e14;
+    }
+    .status.pending {
+        background-color: #6c757d;
+    }
