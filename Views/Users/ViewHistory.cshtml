@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<POE_MVC_part1.Models.Claims>
+
 <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 @Html.Partial("_NavigationBars")
 
@@ -8,45 +7,61 @@
 <div class="Content_View">
     <h3>Claim History</h3>
     <p>Below is a summary of all your submitted claims, including status.</p>
-    <div class="back_link" >
-        <a href="@Url.Action("Lecture", "Users")" >
+
+    <div class="back_link">
+        <a href="@Url.Action("Lecture", "Users")">
             &larr; Back to Lecturer Dashboard
         </a>
     </div>
-    <table class="history_table">
+
+    <table class="claims-table">
         <thead>
             <tr>
-                <th>Claim ID</th>
                 <th>Module</th>
-                <th>Number of Sessions</th>
-                <th>Date Submitted</th>
+                <th>Sessions</th>
+                <th>Hourly Rate</th>
+                <th>Total</th>
+                <th>Claim Period</th>
                 <th>Status</th>
+                <th>Document</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>C101</td>
-                <td>Programming 1A</td>
-                <td>5</td>
-                <td>25 April 2025</td>
-                <td>Approved</td>
-            </tr>
-            <tr>
-                <td>C102</td>
-                <td>Web Development</td>
-                <td>3</td>
-                <td>05 June 2025</td>
-                <td>Pending</td>
-            </tr>
-            <tr>
-                <td>C103</td>
-                <td>IT Project Management</td>
-                <td>4</td>
-                <td>12 July 2025</td>
-                <td>Rejected</td>
-            </tr>
+            @if (Model == null || !Model.Any())
+            {
+                <tr>
+                    <td colspan="7" class="no-claims">
+                        No claims found for your account.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var claim in Model)
+                {
+                    <tr>
+                        <td>@claim.module_name</td>
+                        <td>@claim.number_of_sssions</td>
+                        <td>@claim.hourly_rate.ToString("R")</td>
+                        <td>@claim.TotalAmount.ToString("r")</td>
+                        <td>@claim.startdate to @claim.end_date</td>
+                        <td>@claim.ClaimStatus</td>
+                        <td>
+                            @if (claim.DocumentData != null)
+                            {
+                                <a class="download-link" asp-action="DownloadClaim" asp-route-id="@claim.Claim_Id">Download</a>
+                            }
+                            else
+                            {
+                                <span>No document</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
+
 </div>
 
 <!--Custom divider code-->

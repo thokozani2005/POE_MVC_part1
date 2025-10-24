@@ -1,0 +1,99 @@
+﻿@model POE_MVC_part1.Models.Register
+
+@Html.Partial("_NavigationBars")
+
+<!--Creating forms for the Login page-->
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+
+<div class="register-container">
+    <div class="register-header">
+        <h3>Sign Up to Continue</h3>
+        <p class="finePrint">
+            <strong>Already registered?</strong>
+            <a href="@Url.Action("LogIn", "Home")">Go back to Login</a>
+        </p>
+    </div>
+
+    <form class="register-form" asp-action="Register" asp-controller="Home" method="post">
+        <div class="input-group">
+            <label>First Name</label>
+            <input type="text" asp-for="name" placeholder="e.g. Brian" />
+            <span asp-validation-for="name" class=""></span>
+        </div>
+
+        <div class="input-group">
+            <label>Last Name</label>
+            <input type="text" asp-for="LastName" placeholder="e.g. Mlambo" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Phone Number</label>
+            <input type="tel" asp-for="cellNumber" placeholder="e.g. 0821234567"/>
+            <span asp-validation-for="cellNumber"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" asp-for="email" placeholder="e.g. brian@example.com"/>
+            <span asp-validation-for="email"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" asp-for="password" placeholder="Create a strong password" />
+            <span asp-validation-for="password"></span>
+        </div>
+
+        <div class="role-section">
+            <p>Select your role:</p>
+
+            <div class="roles">
+                <label class="role-card">
+                    <input type="radio" asp-for="Role" value="Lecturer" />
+                    <div class="role-info">
+                        <span class="title">Lecturer</span>
+                        <small>View Lecturer Dashboard</small>
+                    </div>
+                </label>
+
+                <label class="role-card">
+                    <input type="radio" asp-for="Role" value="PC" />
+                    <div class="role-info">
+                        <span class="title">Programme Coordinator</span>
+                        <small>View PC Dashboard</small>
+                    </div>
+                </label>
+
+                <label class="role-card">
+                    <input type="radio" asp-for="Role" value="AM" />
+                    <div class="role-info">
+                        <span class="title">Academic Manager</span>
+                        <small>View AM Dashboard</small>
+                    </div>
+                </label>
+            </div>
+
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+
+
+        <button type="submit" class="register-btn">Register</button>
+    </form>
+</div>
+
+
+<!--Inserting the custom divider to style this-->
+<div class="custom-shape-divider-bottom-1756420090">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+    </svg>
+</div>
+<footer class="site-footer">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+
+</footer>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

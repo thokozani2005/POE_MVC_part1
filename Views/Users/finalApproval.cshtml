@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
+﻿
 <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 @Html.Partial("_NavigationBars")
 
@@ -29,63 +26,56 @@
             <th>Number of Sessions</th>
             <th>Submission Date</th>
             <th>Coordinator Status</th>
+            <th>Total Amount</th> 
             <th>Decision</th>
+            <th>Document Download</th>
         </tr>
     </thead>
 
     <tbody>
-        <tr>
-            <td>CLM001</td>
-            <td>Siyabonga Dlamini</td>
-            <td>EMP1023</td>
-            <td>Programming 1B</td>
-            <td>12</td>
-            <td>24 June 2025</td>
-            <td class="status pre-approved">Pre Approved</td>
-            
-            <td>
-                <select>
-                    <option value="">-- Select --</option>
-                    <option value="pre-approve">Approve</option>
-                    <option value="review">Reject</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>CLM003</td>
-            <td>Themba Zulu</td>
-            <td>EMP1095</td>
-            <td>Database(Intoduction)</td>
-            <td>10</td>
-            <td>28 August</td>
-            <td class="status pre-approved">Pre Approved</td>
-            <td>
-                <select>
-                    <option value="">-- Select --</option>
-                    <option value="pre-approve">Approve</option>
-                    <option value="review">Reject</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>CLM004</td>
-            <td>Lindiwe Mthembu</td>
-            <td>EMP1210</td>
-            <td>Web Development</td>
-            <td>18</td>
-            <td>15 August 2025</td>
-            <td class="status pre-approved">Pre Approved</td>
+        <!--used a for each loop to display all the claims submitted-->
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.Claim_Id</td>
+                <td>@claim.name</td>
+                <td>@claim.employeenum</td>
+                <td>@claim.module_name</td>
+                <td>@claim.number_of_sssions</td>
+                <td>@claim.startdate</td>
+                <td class="status @claim.ClaimStatus.ToLower().Replace(" ", "-")">@claim.ClaimStatus</td>
 
-            <td>
-                <select>
-                    <option value="">-- Select --</option>
-                    <option value="pre-approve">Approve</option>
-                    <option value="review">Reject</option>
-                </select>
-            </td>
-        </tr>
+               
+                <td>@claim.TotalAmount.ToString("R")</td> 
+                <!-- This is for Final Approval/Rejection  -->
+                <td>
+                    <form asp-action="finalApproval" method="post">
+                        <input type="hidden" name="claimId" value="@claim.Claim_Id" />
+                        <select name="status" required>
+                            <option value="">-- Select --</option>
+                            <option value="Approved">Approve</option>
+                            <option value="Rejected">Reject</option>
+                        </select>
+                        <button type="submit">Save</button>
+                    </form>
+                </td>
+
+                <!-- allowing the users to be able to download the document-->
+                <td>
+                    @if (claim.DocumentData != null && claim.DocumentData.Length > 0)
+                    {
+                        <a href="@Url.Action("DownloadClaim", "Users", new { id = claim.Claim_Id })" class="btn btn-primary">Download Document</a>
+                    }
+                    else
+                    {
+                        <span>No document available</span>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
 <footer class="site-footer">
     <p>&copy; 2025 My Website. All rights reserved.</p>
 </footer>

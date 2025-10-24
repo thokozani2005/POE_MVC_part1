@@ -1,6 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@{
+    var name = Context.Session.GetString("EmployeeName");
+    var lastname = Context.Session.GetString("EmployeeSurname");
+    var empNum = Context.Session.GetInt32("EmpoyeeNum");
+}
 
 
 <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
@@ -8,7 +10,8 @@
 <!--The Am dahsboard content-->
 
 <div class="pcMessage">
-    <h1>Welcome to Your Dashboard</h1>
+    <h2>Welcome, @name @lastname!</h2>
+    <p>Your Employee Number: @empNum</p>
 
     <p>
         As the Academic Manager, your role is vital in providing final oversight for claim approvals.

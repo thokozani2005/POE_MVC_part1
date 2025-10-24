@@ -635,15 +635,16 @@ input[type="radio"]:checked + .role-card {
     }
 /*The history page custom divider*/
 .custom-shape-divider-bottom-1757286662 {
-    bottom: -60%;
+    bottom: -90%;
     left: 0;
     width: 100%;
     overflow: hidden;
     line-height: 0;
+    margin-top: 7%;
 }
 
     .custom-shape-divider-bottom-1757286662 svg {
-        position: relative;
+        margin-top: 7%;
         display: block;
         width: calc(128% + 1.3px);
         height: 310px;
@@ -755,3 +756,207 @@ input[type="radio"]:checked + .role-card {
     color: green;
     font-weight: bold;
 }
+
+
+/* Register Container */
+.register-container {
+    width: 400px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 30px 40px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Header */
+.register-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+    .register-header h3 {
+        color: #2c3e50;
+        font-weight: 600;
+    }
+
+    .register-header .finePrint {
+        font-size: 13px;
+        margin-top: 8px;
+        color: #666;
+    }
+
+    .register-header a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .register-header a:hover {
+            text-decoration: underline;
+        }
+
+/* Form Inputs */
+.input-group {
+    margin-bottom: 15px;
+}
+
+    .input-group label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: #333;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+        font-size: 14px;
+        transition: border 0.3s;
+    }
+
+        .input-group input:focus {
+            border-color: #007bff;
+        }
+
+/* Role Cards */
+.role-section {
+    margin: 20px 0;
+}
+
+    .role-section p {
+        font-weight: 600;
+        color: #444;
+    }
+
+.roles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.role-card {
+    display: flex;
+    flex-direction: column;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: all 0.3s;
+}
+
+    .role-card:hover {
+        background: #e9f3ff;
+        border-color: #007bff;
+    }
+
+    .role-card input {
+        margin-bottom: 5px;
+    }
+
+    .role-card .title {
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .role-card small {
+        color: #666;
+    }
+
+
+    .role-card input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        position: absolute;
+        opacity: 0;
+    }
+
+       
+        .role-card input[type="radio"]:checked + .role-info,
+        .role-card input[type="radio"]:checked ~ .title,
+        .role-card input[type="radio"]:checked ~ small {
+            background-color: #dceeff;
+            border-color: #007bff;
+        }
+
+        
+        .role-card input[type="radio"]:checked + * {
+            background: #dceeff;
+            border-color: #007bff;
+        }
+
+
+
+
+/* Submit Button */
+.register-btn {
+    width: 100%;
+    background: #4B3E3E;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    .register-btn:hover {
+        background: #6a5757;
+    }
+
+
+/* Style the claims table */
+.claims-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+    .claims-table th,
+    .claims-table td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .claims-table th {
+        background-color: #4B3E3E;
+        color: white;
+        font-weight: bold;
+    }
+
+    .claims-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .claims-table tr:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+/* Style for "No claims" row */
+.no-claims {
+    text-align: center;
+    padding: 15px;
+    font-size: 16px;
+    color: #777;
+    font-style: italic;
+}
+
+/* Link styling for document download */
+.download-link {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .download-link:hover {
+        text-decoration: underline;
+    }

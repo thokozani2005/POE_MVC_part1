@@ -1,8 +1,12 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
+@model POE_MVC_part1.Models.Claims
 @{
+    var name = Context.Session.GetString("EmployeeName");
+    var lastname = Context.Session.GetString("EmployeeSurname");
+    var empNum = Context.Session.GetInt32("EmpoyeeNum");
 }
+
+
 
 <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 @Html.Partial("_NavigationBars")
@@ -10,7 +14,8 @@
 
     <!-- Welcome Section -->
     <div class="welcome_section_lecturer">
-        <h2>Welcome, New Lecturer!</h2>
+        <h2>Welcome, @name @lastname!</h2>
+        <p>Your Employee Number: @empNum</p>
         <p>Submit your monthly claims and track their approval status quickly and efficiently.</p>
     </div>
 
@@ -37,60 +42,86 @@
   <div class="form_container">
         <h3>Start Claiming</h3>
 
-        
-
-        <form method="post" class="lecture_form">
-           
+        <!--since forms submit plain texts, we use enctype to tell the browser that we have a binary stream-->
+        <form asp-action="Lecture" asp-controller="Users" method="post" class="lecture_form" enctype="multipart/form-data">
             <div class="roww">
                 <label>Lecture name</label>
-                <input placeholder="Enter your name" required />
+                <input asp-for="name" type="hidden" />
+                <p>@Model.name</p>
             </div>
 
             <div class="roww">
-
                 <label>Employee number</label>
-                <input placeholder="Enter your employee number" required />
+                <input asp-for="employeenum" type="hidden" />
+                <p>@Model.employeenum</p>
             </div>
 
 
             <div class="roww">
-            <label>Module name</label>
-            <input placeholder="Enter Module name eg. prog" required />
+                <label>Module name</label>
+                <input asp-for="module_name" placeholder="Enter Module name eg. prog" required />
+                <span asp-validation-for="module_name"></span>
             </div>
-
 
             <div class="roww">
                 <label>Hourly rate</label>
-                <input type="text" placeholder="eg. 17" required />
+                <input asp-for="hourly_rate" type="text" placeholder="eg. 17" required />
+                <span asp-validation-for="hourly_rate"></span>
             </div>
 
             <div class="roww">
-            <label>Number of sessions</label>
-            <input type="number" placeholder="eg. 17" required />
+                <label>Number of sessions</label>
+                <input asp-for="number_of_sssions" type="number" placeholder="eg. 17" required />
+                <span asp-validation-for="number_of_sssions"></span>
             </div>
 
             <div class="roww">
-            <label>Claim period From</label>
-            <input type="date"  required />
-            </div>
-            <div class="roww">
-            <label>Claim period To</label>
-            <input type="date" required />
+                <label>Claim period From</label>
+                <input asp-for="startdate" type="date" required />
+                <span asp-validation-for="startdate"></span>
             </div>
 
             <div class="roww">
-            <label>Upload documents</label>
-            <input type="file" required />
+                <label>Claim period To</label>
+                <input asp-for="end_date" type="date" required />
+                <span asp-validation-for="end_date"></span>
+            </div>
+
+            <div class="roww">
+                <label>Upload documents</label>
+                <input type="file" asp-for="UploadFile" />
+                <span asp-validation-for="UploadFile"></span>
             </div>
 
             <div class="submit_button">
-               <button type="submit">Submit claim</button>
+                <button type="submit">Submit claim</button>
             </div>
 
             <div class="Viewlink">
-                <a href="@Url.Action("ViewHistory","Users")">View Claim History</a>
+                <a href="@Url.Action("ViewHistory", "Users")">View Claim History</a>
             </div>
         </form>
+
+
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="success_message">
+                <p>@ViewBag.Message</p>
+            </div>
+        }
+
+        @if (ViewBag.Errors != null)
+        {
+            <ul>
+                @foreach (var error in (List<string>)ViewBag.Errors)
+                {
+                    <li>@error</li>
+                }
+            </ul>
+        }
+
+
   </div>
     
 
