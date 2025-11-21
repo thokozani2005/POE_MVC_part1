@@ -85,7 +85,10 @@ namespace POE_MVC_part1.Controllers
             }
 
             var grandTotal = claims.Sum(c => c.TotalAmount);
-            string lecturerName = claims.FirstOrDefault()?.name ?? "Unknown";
+            var lecturer = db.GetLecturerById(empNum); // fetching the correct lecturer info
+            string lecturerName = lecturer?.Name ?? "Unknown";
+
+
 
             byte[] pdfBytes = Document.Create(container =>
             {
