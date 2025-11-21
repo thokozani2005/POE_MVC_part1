@@ -9,6 +9,8 @@ namespace POE_MVC_part1.Controllers
 {
     public class HumanResourceDepartment : Controller
     {
+        private readonly ConnectDatabase _db;
+
         public IActionResult Index()
         {
             return View();
