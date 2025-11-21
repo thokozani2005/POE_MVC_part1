@@ -1,0 +1,83 @@
+﻿@model List<POE_MVC_part1.Models.Claims>
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+@Html.Partial("_NavigationBars")
+
+<h2 class="page-title">Approved Claims</h2>
+<div class="back_link">
+    <a href="@Url.Action("HROffice", "Users")">
+        &larr; Back to Human Resource Dashboard
+    </a>
+</div>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="table-container">
+    <table class="claims-table">
+        <thead>
+            <tr>
+                <th>Lecture</th>
+                <th>Module</th>
+                <th>Sessions</th>
+                <th>Hourly Rate</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Payment Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.name</td>
+                    <td>@claim.module_name</td>
+                    <td>@claim.number_of_sssions</td>
+                    <td>@claim.hourly_rate.ToString("C", new System.Globalization.CultureInfo("en-ZA"))</td>
+                    <td>@claim.TotalAmount.ToString("C", new System.Globalization.CultureInfo("en-ZA"))</td>
+                    <td>@claim.ClaimStatus</td>
+                    <td>@(string.IsNullOrEmpty(claim.PaymentStatus) ? "Pending" : claim.PaymentStatus)</td>
+                    <td class="action-buttons">
+                        <form asp-controller="HumanResourceDepartment"
+                              asp-action="UpdatePayment"
+                              method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="claimId" value="@claim.Claim_Id" />
+                            <input type="hidden" name="status" value="Processed" />
+                            <button type="submit" class="btn btn-success btn-sm">Process Payment</button>
+                        </form>
+
+                        <form asp-controller="HumanResourceDepartment"
+                              asp-action="UpdatePayment"
+                              method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="claimId" value="@claim.Claim_Id" />
+                            <input type="hidden" name="status" value="Delayed" />
+                            <button type="submit" class="btn btn-danger btn-sm">Do Not Process</button>
+                        </form>
+
+                        @* Generate Invoice button (only if payment is processed) *@
+                        @if (claim.PaymentStatus == "Processed")
+                        {
+                            <form asp-controller="HumanResourceDepartment"
+                                  asp-action="GenerateInvoice"
+                                  method="get">
+                                <input type="hidden" name="empNum" value="@claim.employeenum" />
+                                <button type="submit" class="btn btn-primary btn-sm">Generate Invoice</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<footer class="Mysite-footer">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+</footer>

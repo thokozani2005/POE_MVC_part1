@@ -194,5 +194,11 @@ namespace POE_MVC_part1.Controllers
             // Sending file to client as download
             return File(claim.DocumentData, "application/pdf", fileName); 
         }
+
+        public IActionResult HROffice()
+        {
+
+            return View();
+        }
     }
 }

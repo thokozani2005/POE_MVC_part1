@@ -1,0 +1,53 @@
+﻿@model List<POE_MVC_part1.Models.GetUserInfo>
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+@Html.Partial("_NavigationBars")
+
+
+
+
+<h2 class="page-title">Lecturer Management</h2>
+<div class="back_link">
+    <a href="@Url.Action("HROffice", "Users")">
+        &larr; Back to Human Resource Dashboard
+    </a>
+</div>
+<form method="get" asp-action="ManageLectures" class="search-form">
+    <input type="text" name="search" placeholder="Search by name or email..." class="search-input" />
+    <button type="submit" class="search-btn">Search</button>
+</form>
+
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>Employee No.</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var lec in Model)
+        {
+            <tr>
+                <td>@lec.EmployeeNum</td>
+                <td>@lec.Name</td>
+                <td>@lec.LastName</td>
+                <td>@lec.Email</td>
+
+                <td>
+                    <a href="@Url.Action("EditLecturer", "HumanResourceDepartment", new { empNum = lec.EmployeeNum })" class="action-btn edit">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<footer class="manage-footer">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+</footer>

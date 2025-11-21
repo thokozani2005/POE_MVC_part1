@@ -13,17 +13,17 @@
 
 <form class="login" asp-action="LogIn">
     <label>Enter Email</label>
-    <input type="email" asp-for ="email" placeholder="Enter your Email" requred />
+    <input type="email" asp-for ="email" placeholder="Enter your Email"  />
     <span asp-validation-for="email"></span>
 
     <label>Enter Password</label>
-    <input type="password" asp-for = "password" placeholder="Enter your Password" requred />
+    <input type="password" asp-for = "password" placeholder="Enter your Password"  />
     <span asp-validation-for="password"></span>
     <div class="radiobutton">
         <p>Select your role:</p>
 
         <!--Radio button 1-->
-        <input type="radio" id="lecturer" asp-for="Role" value="Lecturer" required />
+        <input type="radio" id="lecturer" asp-for="Role" value="Lecturer"  />
         <label for="lecturer" class="role-card">
             <div class="marker"></div>
             <div class="content">
@@ -41,7 +41,7 @@
             </div>
         </label>
 
-        <input type="radio" id="am" asp-for="Role"  value="AM" required />
+        <input type="radio" id="am" asp-for="Role"  value="AM"  />
         <label for="am" class="role-card">
             <div class="marker"></div>
             <div class="content">
@@ -49,7 +49,18 @@
                 <div class="subtext">View AM Dashboard</div>
             </div>
         </label>
+    
+
+        <input type="radio" id="hr" asp-for="Role" value="HR"  />
+        <label for="hr" class="role-card">
+            <div class="marker"></div>
+            <div class="content">
+                <div class="title">Human Resource</div>
+                <div class="subtext">View HR Dashboard</div>
+            </div>
+        </label>
         <br>
+
 
         <span asp-validation-for="Role"></span>
     </div>

@@ -1,0 +1,31 @@
+﻿@model List<POE_MVC_part1.Models.Claims>
+
+<h2>Invoice for @Model.First().name</h2>
+
+<p><strong>Claim Period:</strong> @Model.First().startdate - @Model.First().end_date</p>
+
+<table style="width:100%; border-collapse: collapse;" border="1">
+    <thead>
+        <tr>
+            <th>Module</th>
+            <th>Sessions</th>
+            <th>Hourly Rate</th>
+            <th>Total Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.module_name</td>
+                <td>@claim.number_of_sssions</td>
+                <td>@claim.hourly_rate.ToString("C", new System.Globalization.CultureInfo("en-ZA"))</td>
+                <td>@claim.TotalAmount.ToString("C", new System.Globalization.CultureInfo("en-ZA"))</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3" style="text-align:right;"><strong>Grand Total:</strong></td>
+            <td>@ViewBag.GrandTotal.ToString("C", new System.Globalization.CultureInfo("en-ZA"))</td>
+        </tr>
+    </tbody>
+</table>

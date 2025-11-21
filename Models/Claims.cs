@@ -39,6 +39,8 @@ namespace POE_MVC_part1.Models
         public double TotalAmount { get; set; }           // number_of_sssions * hourly_rate
         public byte[]? DocumentData { get; set; }
         public string? ClaimStatus { get; set; }
+
+        public string? PaymentStatus { get; set; }
         public string? FileName { get; set; }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Security.Claims;
+using POE_MVC_part1.Controllers;
 
 namespace POE_MVC_part1.Models
 {
@@ -130,6 +131,9 @@ namespace POE_MVC_part1.Models
             return userFound;
         }
 
+
+
+
         //a method that creates the claim tabble
 
         public void GenerateClaimTable()
@@ -218,7 +222,7 @@ namespace POE_MVC_part1.Models
                         command.Parameters.AddWithValue("@EmpoyeeNum", EmployeeNum);
                         command.Parameters.AddWithValue("@ClaimStatus", "Pending"); //setting the status to be default by submission
 
-                        
+
                         command.ExecuteNonQuery();
 
                         Console.WriteLine("Claim stored successfully!");
@@ -340,20 +344,20 @@ namespace POE_MVC_part1.Models
         public List<Claims> ViewandPreApproveClaims()
         {
             // List to store claims
-            List<Claims> claims = new List<Claims>(); 
+            List<Claims> claims = new List<Claims>();
 
             try
             {
-                using (SqlConnection connect = new SqlConnection(connection)) 
+                using (SqlConnection connect = new SqlConnection(connection))
                 {
-                    connect.Open(); 
+                    connect.Open();
 
                     // Query to fetch all claims
                     string query = @"SELECT * FROM Claims";
 
-                    using (SqlCommand cmd = new SqlCommand(query, connect)) 
+                    using (SqlCommand cmd = new SqlCommand(query, connect))
                     {
-                        using (SqlDataReader reader = cmd.ExecuteReader()) 
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -410,9 +414,9 @@ namespace POE_MVC_part1.Models
             }
             catch (Exception ex)
             {
-               
-                Console.WriteLine("Error updating claim status: " + ex.Message);  
-                                                                               
+
+                Console.WriteLine("Error updating claim status: " + ex.Message);
+
             }
             return updated;
         }
@@ -445,6 +449,327 @@ namespace POE_MVC_part1.Models
             return updated;
         }
 
+
+        //creating a method that retrieves all the Lectures
+
+        public List<GetUserInfo> GetAllLecturers()
+        {
+            List<GetUserInfo> lecturers = new List<GetUserInfo>();
+
+            try
+            {
+                using (SqlConnection connect = new SqlConnection(connection))
+                {
+                    connect.Open();
+
+                    string query = @"SELECT EmployeeName, EmployeeSurname, EmpoyeeNum, 
+                             Email, Role 
+                             FROM Users 
+                             WHERE Role = 'Lecturer'";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connect))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                lecturers.Add(new GetUserInfo
+                                {
+                                    Name = reader["EmployeeName"].ToString(),
+                                    LastName = reader["EmployeeSurname"].ToString(),
+                                    EmployeeNum = reader["EmpoyeeNum"].ToString(),
+                                    Email = reader["Email"].ToString(),
+                                    Role = reader["Role"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching lecturers: " + ex.Message);
+            }
+
+            return lecturers;
+        }
+
+
+        public List<GetUserInfo> GetAllLecturers(string searchTerm = "")
+        {
+            List<GetUserInfo> lecturers = new List<GetUserInfo>();
+
+            try
+            {
+                using (SqlConnection connect = new SqlConnection(connection))
+                {
+                    connect.Open();
+
+                    string query = @"SELECT EmpoyeeNum, EmployeeName, EmployeeSurname, Email 
+                             FROM Users
+                             WHERE Role = 'Lecturer'
+                             AND (EmployeeName LIKE @search OR EmployeeSurname LIKE @search OR Email LIKE @search)";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connect))
+                    {
+                        cmd.Parameters.AddWithValue("@search", "%" + searchTerm + "%");
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                lecturers.Add(new GetUserInfo
+                                {
+                                    EmployeeNum = reader["EmpoyeeNum"].ToString(),
+                                    Name = reader["EmployeeName"].ToString(),
+                                    LastName = reader["EmployeeSurname"].ToString(),
+                                    Email = reader["Email"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return lecturers;
+        }
+
+
+        public GetUserInfo GetLecturerById(string empNum)
+        {
+            GetUserInfo lecturer = null;
+
+            using (SqlConnection connect = new SqlConnection(connection))
+            {
+                connect.Open();
+
+                string query = @"SELECT EmpoyeeNum, EmployeeName, EmployeeSurname, Email
+                         FROM Users WHERE EmpoyeeNum = @num";
+
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    cmd.Parameters.AddWithValue("@num", empNum);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            lecturer = new GetUserInfo
+                            {
+                                EmployeeNum = reader["EmpoyeeNum"].ToString(),
+                                Name = reader["EmployeeName"].ToString(),
+                                LastName = reader["EmployeeSurname"].ToString(),
+                                Email = reader["Email"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+
+            return lecturer;
+        }
+
+
+        public void UpdateLecturer(GetUserInfo user)
+        {
+            using (SqlConnection connect = new SqlConnection(connection))
+            {
+                connect.Open();
+
+                string query = @"UPDATE Users 
+                         SET EmployeeName = @name,
+                             EmployeeSurname = @surname,
+                             Email = @Email
+                         WHERE EmpoyeeNum = @num";
+
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    cmd.Parameters.AddWithValue("@name", user.Name);
+                    cmd.Parameters.AddWithValue("@surname", user.LastName);
+                    cmd.Parameters.AddWithValue("@Email", user.Email);
+                    cmd.Parameters.AddWithValue("@num", user.EmployeeNum);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // amethod that retrieves all the claims
+
+        public List<Claims> GetApprovedClaims()
+        {
+            List<Claims> approvedClaims = new List<Claims>();
+
+            try
+            {
+                using (SqlConnection connect = new SqlConnection(connection))
+                {
+                    connect.Open();
+
+                    string query = @"SELECT Claim_Id, EmpoyeeNum, Lecture_Name, Module_Name, Number_ofSessions, 
+                                    Hourly_rate, Total_Amount, Claim_Start_Date, Claim_End_Date, Claim_Status
+                             FROM Claims
+                             WHERE Claim_Status = 'Approved'";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connect))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                approvedClaims.Add(new Claims
+                                {
+                                    Claim_Id = Convert.ToInt32(reader["Claim_Id"]),
+                                    employeenum = Convert.ToInt32(reader["EmpoyeeNum"]),
+                                    name = reader["Lecture_Name"].ToString(),
+                                    module_name = reader["Module_Name"].ToString(),
+                                    number_of_sssions = Convert.ToInt32(reader["Number_ofSessions"]),
+                                    hourly_rate = Convert.ToDouble(reader["Hourly_rate"]),
+                                    TotalAmount = Convert.ToDouble(reader["Total_Amount"]),
+                                    startdate = Convert.ToDateTime(reader["Claim_Start_Date"]).ToString("yyyy-MM-dd"),
+                                    end_date = Convert.ToDateTime(reader["Claim_End_Date"]).ToString("yyyy-MM-dd"),
+                                    ClaimStatus = reader["Claim_Status"].ToString()
+
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching approved claims: " + ex.Message);
+            }
+
+            return approvedClaims;
+        }
+
+
+
+        // New method for MarkAsProcessed view, includes PaymentStatus
+        public List<Claims> GetApprovedClaimsWithPaymentStatus()
+        {
+            List<Claims> approvedClaims = new List<Claims>();
+            try
+            {
+                using (SqlConnection connect = new SqlConnection(connection))
+                {
+                    connect.Open();
+                    string query = @"SELECT Claim_Id, EmpoyeeNum, Lecture_Name, Module_Name, Number_ofSessions, 
+                             Hourly_rate, Total_Amount, Claim_Start_Date, Claim_End_Date, Claim_Status, PaymentStatus
+                             FROM Claims
+                             WHERE Claim_Status = 'Approved'";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connect))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                approvedClaims.Add(new Claims
+                                {
+                                    Claim_Id = Convert.ToInt32(reader["Claim_Id"]),
+                                    employeenum = Convert.ToInt32(reader["EmpoyeeNum"]),
+                                    name = reader["Lecture_Name"].ToString(),
+                                    module_name = reader["Module_Name"].ToString(),
+                                    number_of_sssions = Convert.ToInt32(reader["Number_ofSessions"]),
+                                    hourly_rate = Convert.ToDouble(reader["Hourly_rate"]),
+                                    TotalAmount = Convert.ToDouble(reader["Total_Amount"]),
+                                    startdate = Convert.ToDateTime(reader["Claim_Start_Date"]).ToString("yyyy-MM-dd"),
+                                    end_date = Convert.ToDateTime(reader["Claim_End_Date"]).ToString("yyyy-MM-dd"),
+                                    ClaimStatus = reader["Claim_Status"].ToString(),
+                                    PaymentStatus = reader["PaymentStatus"] == DBNull.Value ? "" : reader["PaymentStatus"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching approved claims with payment status: " + ex.Message);
+            }
+            return approvedClaims;
+        }
+
+
+        // a method that updates the payment status
+
+        public bool UpdatePaymentStatus(int claimId, string status)
+        {
+            bool updated = false;
+            try
+            {
+                using (SqlConnection connect = new SqlConnection(connection))
+                {
+                    connect.Open();
+                    string query = "UPDATE Claims SET PaymentStatus = @status WHERE Claim_Id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connect))
+                    {
+                        cmd.Parameters.AddWithValue("@status", status);
+                        cmd.Parameters.AddWithValue("@id", claimId);
+
+                        int rows = cmd.ExecuteNonQuery();
+                        updated = rows > 0; // If rows > 0, the update was successful
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error updating payment status: " + ex.Message);
+            }
+            return updated;
+        }
+
+
+        public List<Claims> GetProcessedClaimsByLecturer(string empNum)
+        {
+            List<Claims> claims = new List<Claims>();
+            try
+            {
+                using (SqlConnection connect = new SqlConnection(connection))
+                {
+                    connect.Open();
+                    string query = @"SELECT Claim_Id, EmpoyeeNum, Lecture_Name, Module_Name, 
+                    Number_ofSessions, Hourly_rate, Total_Amount, Claim_Start_Date, Claim_End_Date
+                    FROM Claims
+                    WHERE EmpoyeeNum = @empNum AND PaymentStatus = 'Processed'";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connect))
+                    {
+                        cmd.Parameters.AddWithValue("@empNum", empNum);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                claims.Add(new Claims
+                                {
+                                    Claim_Id = Convert.ToInt32(reader["Claim_Id"]),
+                                    employeenum = Convert.ToInt32(reader["EmpoyeeNum"]),
+                                    name = reader["Lecture_Name"].ToString(),
+                                    module_name = reader["Module_Name"].ToString(),
+                                    number_of_sssions = Convert.ToInt32(reader["Number_ofSessions"]),
+                                    hourly_rate = Convert.ToDouble(reader["Hourly_rate"]),
+                                    TotalAmount = Convert.ToDouble(reader["Total_Amount"]),
+                                    startdate = Convert.ToDateTime(reader["Claim_Start_Date"]).ToString("yyyy-MM-dd"),
+                                    end_date = Convert.ToDateTime(reader["Claim_End_Date"]).ToString("yyyy-MM-dd")
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching processed claims: " + ex.Message);
+            }
+            return claims;
+        }
 
     }
 }

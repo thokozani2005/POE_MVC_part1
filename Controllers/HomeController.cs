@@ -73,6 +73,8 @@ namespace POE_MVC_part1.Controllers
                             return RedirectToAction("Program_Coordinator", "Users");
                         case "AM":
                             return RedirectToAction("Academic_Manager", "Users");
+                        case "HR":
+                            return RedirectToAction("HROffice", "Users");
                         default:
                             return RedirectToAction("Dashboard", "Home");
                     }

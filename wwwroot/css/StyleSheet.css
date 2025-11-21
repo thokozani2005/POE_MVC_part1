@@ -996,3 +996,427 @@ input[type="radio"]:checked + .role-card {
     .status.pending {
         background-color: #6c757d;
     }
+
+
+/* General container */
+#hr-welcome {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 20px;
+}
+
+/* Card */
+.hr-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+}
+
+/* Header section */
+.hr-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Avatar icon */
+.hr-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1f8ef1, #6dd5ed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+/* Title & subtitle */
+#hr-welcome-title {
+    margin: 0;
+    font-size: 1.375rem;
+}
+
+.hr-subtext {
+    margin: 6px 0 0;
+    color: #444;
+    font-size: 0.98rem;
+    line-height: 1.4;
+}
+
+/* Quick actions section */
+.hr-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+/* Buttons */
+.hr-btn {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: #ffffff;
+}
+
+/* Specific button colors */
+.lecturers-btn {
+    border-color: #e6eef8;
+    background: #f5fbff;
+}
+
+.claims-btn {
+    border-color: #ffd9d9;
+    background: #fff6f6;
+}
+
+.reports-btn {
+    border-color: #e6f5e6;
+    background: #f7fff7;
+}
+
+.processed-btn {
+    border-color: #eee;
+    background: #ffffff;
+}
+
+/* Push last button to the right */
+.push-right {
+    margin-left: auto;
+}
+
+/* Tip text */
+.hr-tip {
+    margin: 0;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+
+.page-title {
+    margin-top: 20px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-top: 20px;
+    font-family: system-ui, sans-serif;
+}
+
+    .custom-table thead tr {
+        background: #4B3E3E;
+        color: white;
+        text-align: left;
+    }
+
+    .custom-table th {
+        padding: 14px;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .custom-table tbody tr {
+        background: #ffffff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .custom-table tbody tr:hover {
+            transform: scale(1.01);
+            box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+        }
+
+    .custom-table td {
+        padding: 14px;
+        font-size: 0.95rem;
+        color: #333;
+        border-top: 1px solid #eee;
+    }
+
+    .custom-table tbody tr:first-child td {
+        border-top: none;
+    }
+
+    /* Optional: rounded rows */
+    .custom-table tbody tr {
+        border-radius: 10px;
+    }
+
+/* Search Box */
+.search-form {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #800000;
+    outline: none;
+}
+
+.search-btn {
+    background: #4B3E3E;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+    .search-btn:hover {
+        background: #a00000;
+    }
+
+/* Action Button */
+.action-btn.edit {
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #4B3E3E;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    .action-btn.edit:hover {
+        background: #a00000;
+    }
+
+.manage-footer {
+    margin-top:10%;
+    background-color: #222;
+    color: #fff;
+    height: 40px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+    .manage-footer p {
+        font-size: 18px;
+    }
+
+/* Edit Lecturer Section */
+.edit-lecturer-section {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Form Container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form Groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+    .form-group label {
+        font-weight: 600;
+        color: #333;
+    }
+
+.form-control {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #800000;
+        outline: none;
+    }
+
+/* Save button */
+.btn-save {
+    margin-top: 10px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4B3E3E;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+    .btn-save:hover {
+        background-color: #a00000;
+    }
+
+/* Tips box */
+.tips-box {
+    margin-top: 20px;
+    padding: 15px 20px;
+    border-left: 4px solid #800000;
+    background: #f9f2f2;
+    border-radius: 8px;
+    color: #333;
+}
+
+    .tips-box h4 {
+        margin-top: 0;
+        font-size: 1rem;
+    }
+
+    .tips-box ul {
+        margin: 10px 0 0 20px;
+        padding: 0;
+    }
+
+        .tips-box ul li {
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+.approved-claims {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+    .approved-claims th, .approved-claims td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .approved-claims th {
+        background-color: #4B3E3E; 
+        color: #fff;
+    }
+
+    .approved-claims tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .approved-claims tbody tr:hover {
+        background-color: #f1e7e7;
+    }
+
+.tip {
+    margin-top: 10px;
+    background: #fff3f3;
+    padding: 10px;
+    border-left: 4px solid #800000;
+    color: #333;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+.page-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #4B3E3E;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin: 20px auto;
+    padding: 15px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+.claims-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+    .claims-table th, .claims-table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 12px 15px;
+    }
+
+    .claims-table th {
+        background-color: #4B3E3E;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 8px;
+    }
+
+    .claims-table tr:nth-child(even) {
+        background-color: #f9f2f2;
+    }
+
+
+.btn-sm {
+    font-size: 12px;
+    padding: 6px 12px;
+    margin: 2px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: #4B3E3E;
+    border: none;
+    color: #fff;
+}
+
+    .btn-success:hover {
+        background-color: #a60000;
+    }
+
+.btn-danger {
+    background-color: #c0392b;
+    border: none;
+    color: #fff;
+}
+
+    .btn-danger:hover {
+        background-color: #e74c3c;
+    }
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.inline-form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    position: relative;
+    z-index: 10;
+}

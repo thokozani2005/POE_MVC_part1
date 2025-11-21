@@ -72,6 +72,14 @@
                         <small>View AM Dashboard</small>
                     </div>
                 </label>
+
+                <label class="role-card">
+                    <input type="radio" asp-for="Role" value="HR" />
+                    <div class="role-info">
+                        <span class="title">Human Resource</span>
+                        <small>View HR Dashboard</small>
+                    </div>
+                </label>
             </div>
 
             <span asp-validation-for="Role" class="text-danger"></span>

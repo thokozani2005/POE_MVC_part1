@@ -1,0 +1,52 @@
+﻿@using System.Globalization
+
+@model List<POE_MVC_part1.Models.Claims>
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+
+@Html.Partial("_NavigationBars")
+<h2>Approved Claims</h2>
+
+<div class="back_link">
+    <a href="@Url.Action("HROffice", "Users")">
+        &larr; Back to Human Resource Dashboard
+    </a>
+</div>
+<p class="tip"> Tip: These are all approved claims. You can review them before starting the payment process.</p>
+
+<table class="table table-bordered table-hover approved-claims">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Lecturer Name</th>
+            <th>Module</th>
+            <th>Sessions</th>
+            <th>Hourly Rate</th>
+            <th>Total Amount</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.Claim_Id</td>
+                <td>@claim.name</td>
+                <td>@claim.module_name</td>
+                <td>@claim.number_of_sssions</td>
+                <td>@claim.hourly_rate.ToString("C", new CultureInfo("en-ZA"))</td>
+                <td>@claim.TotalAmount.ToString("C", new CultureInfo("en-ZA"))</td>
+                <td>@claim.startdate</td>
+                <td>@claim.end_date</td>
+                <td>@claim.ClaimStatus</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<footer class="Mysite-footer">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+</footer>
