@@ -1,7 +1,17 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@Html.Partial("_NavigationBars")
+
+
+<nav class="navigation">
+    <h1>Contract Monthly Claim System</h1>
+    <a href="@Url.Action("Dashboard", "Home")">Home</a>
+
+
+    <a href="@Url.Action("LogIn", "Home")"><i class="fa-solid fa-user"></i>Log In</a>
+    <a href="@Url.Action("Register", "Home")"><i class="fa-solid fa-user"></i>Register</a>
+</nav>
+
 <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 
 <div class="welcom_message">

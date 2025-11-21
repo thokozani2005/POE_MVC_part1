@@ -13,31 +13,32 @@ namespace POE_MVC_part1.Controllers
         {
             return View();
         }
-
+        //a action result for managing lectures, it has a parameter than allows hr personnel to search for lecturers
         public IActionResult ManageLectures(string search = "")
         {
             ConnectDatabase db = new ConnectDatabase();
             var lecturers = db.GetAllLecturers(search);
             return View(lecturers);
         }
-
+        //an Action result for editing the lecturer details
         public IActionResult EditLecturer(string empNum)
         {
             ConnectDatabase db = new ConnectDatabase();
-            var lecturer = db.GetLecturerById(empNum); // fetch from DB
-            return View(lecturer); // passes to EditLecturer.cshtml
+            var lecturer = db.GetLecturerById(empNum);
+            return View(lecturer); 
         }
 
 
         [HttpPost]
+        //an Action result for editing the lecturer details, this one is a post it updates the details
         public IActionResult EditLecturer(GetUserInfo model)
         {
             ConnectDatabase db = new ConnectDatabase();
-            db.UpdateLecturer(model); // updates the database
+            db.UpdateLecturer(model); 
 
-            return RedirectToAction("ManageLectures"); // back to table view
+            return RedirectToAction("ManageLectures"); 
         }
-
+        //an action result for all the approved claims, it retrieves the approved claims
         public IActionResult ViewApprovedClaims()
         {
                ConnectDatabase db = new ConnectDatabase();
@@ -45,7 +46,7 @@ namespace POE_MVC_part1.Controllers
          return View(approvedClaims);
             
         }
-
+        //this action result allows the processing of all the approved payments
         public IActionResult MarkAsProcessed()
         {
             ConnectDatabase db = new ConnectDatabase();
@@ -65,18 +66,18 @@ namespace POE_MVC_part1.Controllers
                 TempData["Error"] = "Payment status could not be updated!";
             }
 
-            // Fetch updated claims to reflect changes immediately in the table
+            // Fetching all the  updated claims to reflect changes immediately in the table
             var approvedClaims = db.GetApprovedClaimsWithPaymentStatus();
 
             return View("MarkAsProcessed", approvedClaims);
         }
-        
+        //This listener is for generating the invoce, I installed Quest helper to help me generate the invoice and convert it to a pdf
         public IActionResult GenerateInvoice(string empNum)
         {
             ConnectDatabase db = new ConnectDatabase();
 
             var claims = db.GetProcessedClaimsByLecturer(empNum);
-
+            //we can only generate invoice if the claims are marked as processed
             if (claims == null || !claims.Any())
             {
                 TempData["Error"] = "No processed claims available to generate invoice!";
@@ -95,14 +96,14 @@ namespace POE_MVC_part1.Controllers
                     page.PageColor(Colors.White);
                     page.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
 
-                    // HEADER
+                    // This is the page HEADER
                     page.Header()
                         .Row(row =>
                         {
                             row.RelativeColumn()
                                 .Column(col =>
                                 {
-                                    col.Item().Text($"Invoice").Bold().FontSize(24).FontColor(QuestPDF.Helpers.Colors.Blue.Medium); // <- Use a shade
+                                    col.Item().Text($"Invoice").Bold().FontSize(24).FontColor(QuestPDF.Helpers.Colors.Blue.Medium);
                                     col.Item().Text($"Lecturer: {lecturerName}").Bold().FontSize(14);
                                     col.Item().Text($"Claim Period: {claims.First().startdate} - {claims.First().end_date}").FontSize(12);
                                 });
@@ -119,10 +120,10 @@ namespace POE_MVC_part1.Controllers
                             // Columns
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.ConstantColumn(200); // Module
-                                columns.ConstantColumn(80);  // Sessions
-                                columns.ConstantColumn(100); // Hourly Rate
-                                columns.RelativeColumn();    // Total
+                                columns.ConstantColumn(200); 
+                                columns.ConstantColumn(80);  
+                                columns.ConstantColumn(100); 
+                                columns.RelativeColumn();    
                             });
 
                             // HEADER ROW
@@ -134,7 +135,7 @@ namespace POE_MVC_part1.Controllers
                                 header.Cell().Background(Colors.Grey.Lighten2).Padding(5).Text("Total Amount").SemiBold();
                             });
 
-                            // DATA ROWS
+                            // These are the DATA ROWS, I also used cultureInfo to convert the amount to SA Rands
                             foreach (var claim in claims)
                             {
                                 table.Cell().Padding(5).Text(claim.module_name);
@@ -143,7 +144,7 @@ namespace POE_MVC_part1.Controllers
                                 table.Cell().Padding(5).Text(claim.TotalAmount.ToString("C", new System.Globalization.CultureInfo("en-ZA")));
                             }
 
-                            // GRAND TOTAL
+                            // Displaying the GRAND TOTAL
                             table.Footer(footer =>
                             {
                                 footer.Cell().ColumnSpan(3).AlignRight().Padding(5).Text("Grand Total").Bold();
@@ -154,7 +155,7 @@ namespace POE_MVC_part1.Controllers
                     // FOOTER
                     page.Footer()
                         .AlignCenter()
-                        .Text($"Generated by ResConnect © {DateTime.Now:yyyy}");
+                        .Text($"Generated by Contract Monthly Claim System © {DateTime.Now:yyyy}");
                 });
             }).GeneratePdf();
 

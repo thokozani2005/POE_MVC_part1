@@ -59,7 +59,7 @@
                             <button type="submit" class="btn btn-danger btn-sm">Do Not Process</button>
                         </form>
 
-                        @* Generate Invoice button (only if payment is processed) *@
+                        @* Generate Invoice button only if payment is processed *@
                         @if (claim.PaymentStatus == "Processed")
                         {
                             <form asp-controller="HumanResourceDepartment"

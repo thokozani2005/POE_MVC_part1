@@ -34,9 +34,9 @@ namespace POE_MVC_part1.Models
         // Default status on submission
         public string status { get; set; } = "Pending";
 
-        // --- NEW FIELDS FOR HISTORY VIEW ---
-        public int Claim_Id { get; set; }                 // PK in DB
-        public double TotalAmount { get; set; }           // number_of_sssions * hourly_rate
+       
+        public int Claim_Id { get; set; }                
+        public double TotalAmount { get; set; }        
         public byte[]? DocumentData { get; set; }
         public string? ClaimStatus { get; set; }
 

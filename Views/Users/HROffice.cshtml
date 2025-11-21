@@ -8,31 +8,57 @@
 <!--The pc dahsboard content-->
 <section id="hr-welcome" role="main" aria-labelledby="hr-welcome-title">
     <div class="hr-container">
+
+        <!-- Header Section -->
         <div class="hr-header">
             <div class="hr-avatar">HR</div>
 
             <div>
                 <h1 id="hr-welcome-title">
-                    Welcome, <span id="hrNamePlaceholder">@name @lastname</span>
+                    Welcome to the Human Resource Portal,
+                    <span id="hrNamePlaceholder">@name @lastname</span>
                 </h1>
+
                 <p class="hr-subtext">
-                    Thank you for keeping our institution running smoothly. Use the tools below to manage lecturer records, process approved claims, and generate payment reports.
+                    This dashboard helps you manage lecturer information, verify claim submissions,
+                    and generate official payment reports. Use the quick tools below to get started.
                 </p>
             </div>
         </div>
 
+        <!-- Actions Section -->
         <nav class="hr-actions" aria-label="HR quick actions">
-            <a href="@Url.Action("ManageLectures", "HumanResourceDepartment")"><button type="button" class="hr-btn lecturers-btn">Manage Lecturers</button></a>
-            <a href="@Url.Action("ViewApprovedClaims", "HumanResourceDepartment")"><button type="button" class="hr-btn claims-btn">View Approved Claims</button></a>
-            <a href="@Url.Action("GenerateInvoice", "HumanResourceDepartment")"><button type="button" class="hr-btn reports-btn">Generate Payment Report</button></a>
-            <a href="@Url.Action("MarkAsProcessed", "HumanResourceDepartment")" class="push-right"><button type="button" class="hr-btn processed-btn">Mark Claims as Processed</button></a>
+            <a href="@Url.Action("ManageLectures", "HumanResourceDepartment")">
+                <button type="button" class="hr-btn lecturers-btn">Manage Lecturers</button>
+            </a>
+
+            <a href="@Url.Action("ViewApprovedClaims", "HumanResourceDepartment")">
+                <button type="button" class="hr-btn claims-btn">View Approved Claims</button>
+            </a>
+
+            <a href="@Url.Action("MarkAsProcessed", "HumanResourceDepartment")">
+                <button type="button" class="hr-btn processed-btn">Process Claims</button>
+            </a>
+
+            <a href="@Url.Action("GenerateInvoice", "HumanResourceDepartment")">
+                <button type="button" class="hr-btn reports-btn">Generate Payment Report</button>
+            </a>
         </nav>
 
+        <!-- Extra Info -->
         <p class="hr-tip">
-            Tip: click "Generate Payment Report" to create a downloadable summary (PDF) of approved claims, then mark them as processed.
+            Tip: After confirming that a lecturer’s claim is correct, mark it as
+            <strong>Processed</strong> before generating a downloadable invoice or payment report.
         </p>
+
+        <p class="hr-description">
+            This portal is designed to streamline HR operations and ensure accurate processing
+            of lecturer claims throughout each payment cycle.
+        </p>
+
     </div>
 </section>
+
 
 
 <div class="custom-shape-divider-bottom-1756250670">
